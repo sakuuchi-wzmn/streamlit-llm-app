@@ -2,8 +2,6 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.schema import SystemMessage, HumanMessage
-from langchain import LLMChain
-from langchain.chains.router.multi_prompt_prompt import MULTI_PROMPT_ROUTER_TEMPLATE
 import streamlit as st
 
 
@@ -25,7 +23,6 @@ selected_item = st.radio(
 st.divider()
 input_text = st.text_input(label="（２）質問内容を入力してください。")
 
-st.divider()
 
 def chat(template, input_text):
     # フォーマット文字列を含むプロンプトを生成
@@ -56,6 +53,7 @@ if len(selected_item) > 0 and len(input_text) > 0:
     質問：{input}
     """
             result = chat(template1, input_text)
+            st.divider()
             st.write(result.content)
 
         case "子供の栄養でお悩み":
@@ -67,6 +65,7 @@ if len(selected_item) > 0 and len(input_text) > 0:
     質問：{input}
     """
             result = chat(template2, input_text)
+            st.divider()
             st.write(result.content)
 
         case "子どもの睡眠習慣":
@@ -78,5 +77,6 @@ if len(selected_item) > 0 and len(input_text) > 0:
     質問：{input}
     """
             result = chat(template3, input_text)
+            st.divider()
             st.write(result.content)
 
